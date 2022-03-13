@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load leaflet_tags %}
+{% load static %}
+{% load geojson_tags %}
+
+{% block content %}
+
+<section class="section-content padding-y">
+
+<!-- ============================ COMPONENT REGISTER   ================================= -->
+<a href="{% url 'register' %}" class="btn btn-outline-primary float-right"> moshtari sign up</a>
+<a href="{% url 'ownerregister' %}" class="btn btn-outline-primary float-right"> owner sign up</a>
+
+	<div class="card mx-auto" style="max-width:750px; margin-top:40px;">
+      <article class="card-body">
+		{% include 'includes/alerts.html' %}
+		<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
+			<form enctype="multipart/form-data" action="{% url 'ownerregister' %}" method="POST">
+
+         				{% csrf_token %}
+
+
+				
+						{% leaflet_js %}
+						{% leaflet_css %}
+							{{form.as_p}}
+							<script type="text/javascript">
+								function location_layer(map, options){
+									var locate = L.control.locate({
+										drawCircle: false,
+										icon: "fa fa-location-arrow",
+										position : 'topright',
+										maxZoom: 4,
+										strings: {
+											title: "Show My Location"
+										}
+									});
+									locate.addTo(map);
+								}
+							</script>
+							{% leaflet_map "main" callback="map_init" %}
+				   
+			        <button type="submit" class="btn btn-primary btn-block"> Register </button>
+			    </div> <!-- form-group// -->
+     		 {{ form.email.errors }}
+      		 {{ form.non_field_errors }}
+			</form>
+		</article><!-- card-body.// -->
+    </div> <!-- card .// -->
+
+    <p class="text-center mt-4">Have an account? <a href="{% url 'ghanadilogin' %}">Log In</a></p>
+    <br><br>
+<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+
+
+</section>
+
+{% endblock %}

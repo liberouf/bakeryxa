@@ -1,0 +1,67 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm">
+<div class="container">
+
+<div class="intro-banner-wrap">
+	<img src="{% static 'images/banners/2.jpg' %}" class="img-fluid rounded">
+</div>
+
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+<div class="container">
+
+<header class="section-heading">
+	<a href="{% url 'bakeries' %}" class="btn btn-outline-primary float-right">See all</a>
+	<h3 class="section-title">Populars</h3>
+</header><!-- sect-heading -->
+
+
+<div class="row">
+	{% for bakery in bakeries %}
+	<div class="col-md-3">
+		<div class="card card-product-grid">
+			<a href="{{ bakery.get_url }}" class="img-wrap"> <img src="{{ bakery.images.url }}"> </a>
+			<figcaption class="info-wrap">
+				<a href="{{ bakery.get_url }}" class="title">{{ bakery.name }}</a>
+				<div class="price mt-1">$ {{ bakery.price }}</div> <!-- price-wrap.// -->
+				<div class="rating-star">
+					<span>
+						<i class="fa fa-star{% if bakery.averageReview < 0.5 %}-o{% elif bakery.averageReview >= 0.5 and bakery.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+						<i class="fa fa-star{% if bakery.averageReview < 1.5 %}-o{% elif bakery.averageReview >= 1.5 and bakery.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+						<i class="fa fa-star{% if bakery.averageReview < 2.5 %}-o{% elif bakery.averageReview >= 2.5 and bakery.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+						<i class="fa fa-star{% if bakery.averageReview < 3.5 %}-o{% elif bakery.averageReview >= 3.5 and bakery.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+						<i class="fa fa-star{% if bakery.averageReview < 4.5 %}-o{% elif bakery.averageReview >= 4.5 and bakery.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+						</span>
+				</div>
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+	{% endfor %}
+</div> <!-- row.// -->
+
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+
+
+
+
+
+</body>
+</html>
+
+{% endblock %}

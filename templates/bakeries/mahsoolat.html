@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{%load static %}
+
+{% block content %} 
+
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg">
+	<div class="container">
+		{% if 'search' in request.path %}
+			<h2 class="title-page">Search Result</h2>
+		{% else %}
+			<h2 class="title-page">mahsoolate ghanadi {{ghanadi}}</h2>
+		{% endif %}
+	
+	</div> <!-- container //  -->
+	</section>
+	<!-- ========================= SECTION INTRO END// ========================= -->
+	<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+	<div class="container">
+	
+	<div class="row">
+		<aside class="col-md-3">
+	
+	<div class="card">
+		<article class="filter-group">
+			<header class="card-header">
+				<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+					<i class="icon-control fa fa-chevron-down"></i>
+					<h6 class="title">Categories</h6>
+				</a>
+			</header>
+			<div class="filter-content collapse show" id="collapse_1" style="">
+				<div class="card-body">
+	
+					<ul class="list-menu">
+						<li><a href="{% url 'bakeries' %}">hame ghanadi ha</a></li>
+						<li><a href="{% url 'bakeries-zone' %}">ghanadi haye dar mahdoode</a></li>
+					</ul>
+
+				</div> <!-- card-body.// -->
+			</div>
+		</article> <!-- filter-group  .// -->
+	</div> <!-- card.// -->
+
+ 
+</aside> <!-- col.// -->
+<main class="col-md-9">
+
+			<header class="border-bottom mb-4 pb-3">
+				<div class="form-inline">
+					<span class="mr-md-auto"><b>{{ mahsoola_count }}</b> items found </span>
+				</div>
+            </aside> <!-- col.// -->
+			{% if 'search' not in request.path %}
+				<div>
+					<a href="{% url 'mahsool-jadid' id %}" class="btn btn-block btn-primary" > mahsole jadid? <br> (faghat saheb ghanadi mitavanad mohssol jadid ra tarif konad)</a>
+				</div>
+			{% endif %}
+
+			</header><!-- sect-heading -->
+ 
+		
+					
+		<div class="row">
+			{% if mahsoola %}
+			{% for mahsool in mahsoola %}
+			<div class="col-md-4">
+				<figure class="card card-product-grid">
+					<div class="img-wrap">
+
+						<a href="#"><img src="{{ mahsool.imagesurl }}"></a>
+
+					</div> <!-- img-wrap.// -->
+					<figcaption class="info-wrap">
+						<div class="fix-height">
+							<a href="#" class="title">{{ mahsool.name }}</a>
+							<div class="price-wrap mt-2">
+								<span class="price">kilooei : {{ mahsool.price }} Toman</span>
+							</div> <!-- price-wrap.// -->
+						</div>
+						<div class="rating-star">
+							<span>
+								<i class="fa fa-star{% if mahsool.averageReview < 0.5 %}-o{% elif mahsool.averageReview >= 0.5 and mahsool.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+								<i class="fa fa-star{% if mahsool.averageReview < 1.5 %}-o{% elif mahsool.averageReview >= 1.5 and mahsool.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+								<i class="fa fa-star{% if mahsool.averageReview < 2.5 %}-o{% elif mahsool.averageReview >= 2.5 and mahsool.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+								<i class="fa fa-star{% if mahsool.averageReview < 3.5 %}-o{% elif mahsool.averageReview >= 3.5 and mahsool.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+								<i class="fa fa-star{% if mahsool.averageReview < 4.5 %}-o{% elif mahsool.averageReview >= 4.5 and mahsool.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+								</span>
+						</div>
+					
+					</figcaption>
+					<a href="{% url 'mahsool-detail' mahsool.id %}" class="btn btn-block btn-primary" >View Details </a>
+						
+				</figure>
+			</div> <!-- col.// -->
+			{% endfor %}
+			{% else %}
+			<div>
+				<h2>No result found. Please try again.</h2>
+			</div>	
+			{% endif %}
+		</div> <!-- row end.// -->
+		
+	</div>
+</div>
+
+
+  
+
+{% endblock %} 
