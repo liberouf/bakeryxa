@@ -31,6 +31,8 @@ def bakeries(request):
 
 def bakerieszone(request):
     #bakeries = ghanadi.objects.order_by('-rating')[0]
+    for product in product:
+        reviews = ReviewRating.objects.filter(product_id=product.id, status=True)
     if request.user.position:
         ref_location = request.user.position
     else:
@@ -38,6 +40,7 @@ def bakerieszone(request):
     bakeries_zone = ghanadi.objects.filter(position__distance_lte=(ref_location, D(m=5000))).annotate(distance=GeometryDistance('position', ref_location)) 
     bakeries=bakeries_zone
     bakeries_count = bakeries.count()
+    
     context = {
             'bakeries': bakeries,
             'bakeries_count': bakeries_count,
