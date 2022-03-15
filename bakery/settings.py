@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import locale
 from decouple import config
+import os
 from os import getenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -98,11 +99,11 @@ AUTH_USER_MODEL = 'accounts.Account'
 DATABASES = {
             'default': {
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
-            'NAME':'bakeryxa',
-            'USER':'postgres',  
-            'PASSWORD':'261179Xa',
-            'HOST': 'localhost',
-            'PORT': '5434',
+            'NAME': os.environ.get('QOVERY_POSTGRESQL_ZC4379C38_DEFAULT_DATABASE_NAME','postgres'),
+            'USER': os.environ.get('QOVERY_POSTGRESQL_ZC4379C38_LOGIN','qoveryadmin'),  
+            'PASSWORD': os.environ.get('QOVERY_POSTGRESQL_ZC4379C38_PASSWORD'),
+            'HOST':  os.environ.get('QOVERY_POSTGRESQL_ZC4379C38_HOST','zc4379c38-postgresql.||Q_DOMAIN||'),
+            'PORT':  os.environ.get('QOVERY_POSTGRESQL_ZC4379C38_PORT','5432'),
         }
 }
 
@@ -148,7 +149,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-import os
+
 import platform
 
 WINDOWS = platform.system() == "Windows"
