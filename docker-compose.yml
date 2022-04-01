@@ -17,7 +17,36 @@ services:
     ports:
       - "8000:8000"
     environment:
+      - POSTGRES_NAME=postgresversion: "3"
+   
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
       - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./usr/src:/app
+
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+
+
+    
+
+
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     depends_on:
