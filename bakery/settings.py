@@ -99,11 +99,11 @@ AUTH_USER_MODEL = 'accounts.Account'
 DATABASES = {
             'default': {
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
-            'NAME': os.environ.get('QOVERY_POSTGRESQL_ZC4379C38_DEFAULT_DATABASE_NAME','postgres'),
-            'USER': os.environ.get('QOVERY_POSTGRESQL_ZC4379C38_LOGIN','qoveryadmin'),  
-            'PASSWORD': os.environ.get('QOVERY_POSTGRESQL_ZC4379C38_PASSWORD'),
-            'HOST':  os.environ.get('QOVERY_POSTGRESQL_ZC4379C38_HOST','zc4379c38-postgresql.||Q_DOMAIN||'),
-            'PORT':  os.environ.get('QOVERY_POSTGRESQL_ZC4379C38_PORT','5432'),
+            'NAME':'bakeryxa',
+            'USER':'postgres',  
+            'PASSWORD':'261179Xa',
+            'HOST': 'localhost',
+            'PORT': '5434',
         }
 }
 
